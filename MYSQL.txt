@@ -69,3 +69,36 @@ DELETE FROM albums WHERE id = 5 OR id = 10;
 
 SELECT * FROM albums
 WHERE release_year IS NULL;
+
+/*Inner JOIN : joins tables where data from both tables have matching id*/
+
+SELECT * FROM bands                     /*Join two tables based on their Id's*/
+INNER JOIN albums ON bands.id = albums.band_id;
+
+/*LEFT JOIN: Join tables even if the data on the left table doesnt have matching id's*/
+
+SELECT * FROM bands                     /*Join two tables based on their Id's*/
+LEFT JOIN albums ON bands.id = albums.band_id;
+
+/*RIGHT JOIN: Join tables even if the data on the right table doesnt have matching id's*/
+SELECT * FROM bands                     /*Join two tables based on their Id's*/
+RIGHT JOIN albums ON bands.id = albums.band_id;
+
+/*Aggregate functions*/
+SELECT AVG(release_year) from albums;
+
+SELECT band_id, COUNT(band_id) 
+FROM albums GROUP BY band_id; /*Selects band_id column, the count of them, and order by their band_id*/
+
+-- SELECT b.name AS band_name , COUNT(a.id) AS num_albums
+-- FROM bands AS b
+
+SELECT b.name AS band_name,  COUNT(a.id) AS num_albums FROM bands AS b
+LEFT JOIN albums AS a ON b.id = a.band_id
+GROUP BY b.id
+-- WHERE num_albums =1 ;  cant use where after grouby , use having instead (can only use where before group by
+HAVING num_albums = 2;
+
+
+
+
