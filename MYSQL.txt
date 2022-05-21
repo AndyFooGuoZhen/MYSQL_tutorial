@@ -1,0 +1,21 @@
+CREATE DATABASE record_company;  /* creating a database*/
+USE record_company;   /*tells mysql workbench we are using this database*/
+
+
+CREATE TABLE bands (   /*creates a ttable called bands, with the column of test_column inside*/
+	id INT NOT NULL AUTO_INCREMENT,
+	name  VARCHAR(255) NOT NULL ,  /* NOTE: to add more columns, dont edit the line here, previous data will go missing*/
+     PRIMARY KEY(id)
+);
+
+
+CREATE TABLE albums(
+id INT NOT NULL AUTO_INCREMENT,
+name VARCHAR(255) NOT NULL,
+release_year INT,
+band_id INT NOT NULL,  /* Using band id to reference band, this serves as the foreign key*/
+PRIMARY KEY (id),
+FOREIGN KEY (band_id) REFERENCES bands(id)  /*Add band_id as foreign key, reference the id column of the bands table*/
+												/*If a band is deleted, its albums must also be deleted*/
+);
+
